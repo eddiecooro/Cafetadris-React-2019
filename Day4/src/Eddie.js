@@ -57,7 +57,7 @@ function getDomNodeForElement(element) {
   return dom;
 }
 
-export function render(domNode, eddieElement) {
+export function render(eddieElement, domNode) {
   domNode.appendChild(getDomNodeForElement(eddieElement));
 }
 
