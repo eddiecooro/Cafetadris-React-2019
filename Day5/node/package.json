@@ -1,0 +1,21 @@
+{
+  "name": "day5-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "babel": "babel --out-dir dist src"
+  },
+  "author": "Eddie",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1"
+  },
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  }
+}
