@@ -1,0 +1,3 @@
+[submodule "edCommerce"]
+	path = edCommerce
+	url = https://github.com/Eddie-CooRo/edCommerce
