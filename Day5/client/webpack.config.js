@@ -6,7 +6,8 @@ var path = require('path');
 const entry = {
   app: './src/index.js'
 };
-if (package.dependencies) entry.vendor = Object.keys(package.dependencies);
+if (package.dependencies)
+  entry.vendor = Object.keys(package.dependencies);
 
 module.exports = {
   entry: entry,
@@ -37,7 +38,9 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],
+            presets: [
+              ['@babel/preset-env', { targets: { chrome: 70 } }]
+            ],
             plugins: [
               '@babel/plugin-proposal-class-properties',
               '@babel/plugin-transform-react-jsx'
