@@ -1,8 +1,3 @@
-let sum = () => {};
+export let sum = () => {};
 
-let curriedSum = () => {};
-
-module.exports = {
-  sum,
-  closureSum
-};
+export let curriedSum = () => {};
