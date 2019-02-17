@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useCallback } from 'react';
 import styles from './Timer.module.css';
 
 class Timer extends Component {
@@ -69,13 +69,47 @@ class Timer extends Component {
   }
 }
 
+// let interval = null;
 // function Timer(props) {
+//   let [value, setValue] = useState(0);
+//   let [started, setStarted] = useState(false);
+
+//   let start = useCallback(() => {
+//     if (!interval) {
+//       setStarted(true);
+//       interval = setInterval(() => {
+//         setValue(prevValue => prevValue + 1);
+//       }, 1000);
+//     }
+//   }, [interval]);
+
+//   let pause = useCallback(() => {
+//     if (interval) {
+//       setStarted(false);
+//       clearInterval(interval);
+//       interval = null;
+//     }
+//   }, [interval]);
+
+//   let reset = useCallback(() => {
+//     pause();
+//     setValue(0);
+//   }, []);
+
+//   let toggle = useCallback(() => {
+//     if (!started) start();
+//     else pause();
+//   }, [started]);
+
 //   return (
 //     <div>
 //       <p className={styles.number}>{value}</p>
-//       <button className={styles.button}>Start</button>
-//       <button className={styles.button}>Pause</button>
-//       <button className={styles.button}>Reset</button>
+//       <button onClick={toggle} className={styles.button}>
+//         {started ? 'Pause' : 'Start'}
+//       </button>
+//       <button onClick={reset} className={styles.button}>
+//         Reset
+//       </button>
 //     </div>
 //   );
 // }
