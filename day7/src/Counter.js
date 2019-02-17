@@ -57,27 +57,27 @@ class Counter extends Component {
   }
 }
 
-function Counter(props) {
-  let [value, setValue] = useState(0);
-  let increment = () => {
-    setValue(1000);
-  };
-  let decrement = () => {
-    setValue(value - 1);
-  };
-  if (props.min > value) setValue(props.min);
-  else if (props.max < value) setValue(props.max);
-  return (
-    <div>
-      <p className={styles.number}>{value}</p>
-      <button onClick={increment} className={styles.button}>
-        Increment
-      </button>
-      <button onClick={decrement} className={styles.button}>
-        Decrement
-      </button>
-    </div>
-  );
-}
+// function Counter(props) {
+//   let [value, setValue] = useState(0);
+//   let increment = () => {
+//     setValue(1000);
+//   };
+//   let decrement = () => {
+//     setValue(value - 1);
+//   };
+//   if (props.min > value) setValue(props.min);
+//   else if (props.max < value) setValue(props.max);
+//   return (
+//     <div>
+//       <p className={styles.number}>{value}</p>
+//       <button onClick={increment} className={styles.button}>
+//         Increment
+//       </button>
+//       <button onClick={decrement} className={styles.button}>
+//         Decrement
+//       </button>
+//     </div>
+//   );
+// }
 
 export default Counter;
