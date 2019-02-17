@@ -7,7 +7,8 @@ import './App.css';
 
 class App extends Component {
   state = {
-    showTimer: false
+    showTimer: false,
+    value: 0
   };
 
   componentDidMount() {
@@ -16,6 +17,13 @@ class App extends Component {
     //     showTimer: !this.state.showTimer
     //   });
     // }, 2000);
+    setInterval(() => {
+      this.setState(prevState => {
+        return {
+          value: prevState.value + 1
+        };
+      });
+    }, 2000);
   }
 
   render() {
@@ -26,7 +34,7 @@ class App extends Component {
         {/* {this.state.showTimer ? <Timer /> : null} */}
         <Timer />
         <hr />
-        <Counter />
+        <Counter min={this.state.value} />
         <hr />
         <MouseTracker />
       </div>
