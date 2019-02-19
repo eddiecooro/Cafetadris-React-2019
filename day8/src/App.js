@@ -34,7 +34,7 @@ class App extends Component {
         {/* {this.state.showTimer ? <Timer /> : null} */}
         <Timer />
         <hr />
-        <Counter min={0} />
+        <Counter min={12} max={20} />
         <hr />
         <MouseTracker />
       </div>
