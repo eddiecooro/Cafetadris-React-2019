@@ -29,36 +29,31 @@ class TodoList extends Component {
     });
   };
 
-  toggle = index => {
+  toggle = id => {
     this.setState(prevState => {
       return {
         todos: prevState.todos.map((todo, i) => {
-          if (i === index) return { ...todo, done: !todo.done };
+          if (todo.id === id) return { ...todo, done: !todo.done };
           else return todo;
         })
       };
     });
   };
 
-  edit = (newName, index) => {
+  edit = (newName, id) => {
     this.setState(prevState => {
       return {
         todos: prevState.todos.map((todo, i) => {
-          if (i === index) return { ...todo, name: newName };
+          if (todo.id === id) return { ...todo, name: newName };
           else return todo;
         })
       };
     });
   };
 
-  delete = index => {
+  delete = id => {
     this.setState(prevState => {
-      return {
-        todos: [
-          ...prevState.todos.slice(0, index),
-          ...prevState.todos.slice(index + 1)
-        ]
-      };
+      return prevState.todos.filter(todo => todo.id !== id);
     });
   };
 
@@ -97,9 +92,9 @@ class TodoList extends Component {
             <TodoListItem
               {...todo}
               key={todo.id}
-              onToggle={() => this.toggle(index)}
-              onDelete={() => this.delete(index)}
-              onEdit={newName => this.edit(newName, index)}
+              onToggle={() => this.toggle(todo.id)}
+              onDelete={() => this.delete(todo.id)}
+              onEdit={newName => this.edit(newName, todo.id)}
             />
           ))}
         </ul>
