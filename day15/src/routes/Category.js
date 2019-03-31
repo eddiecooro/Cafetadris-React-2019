@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import authUtils from './utils/authUtils';
-import urls from './api/urls';
-import api from './api';
+import api from '../api';
 
 export class Category extends Component {
   state = {

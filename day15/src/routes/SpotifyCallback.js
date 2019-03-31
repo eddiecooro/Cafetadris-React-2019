@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import authUtils from './utils/authUtils';
+import authUtils from '../utils/authUtils';
 
 export class SpotifyCallback extends Component {
   constructor(props) {

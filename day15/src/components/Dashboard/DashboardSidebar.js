@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as Spotify } from '../assets/spotify.svg';
+import { ReactComponent as Spotify } from '../../assets/spotify.svg';
 
 const activeClassName = 'Active';
 const sidebarOpenClassName = 'sidebar-open';

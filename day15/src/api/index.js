@@ -2,10 +2,12 @@ import urls from './urls';
 import authUtils from '../utils/authUtils';
 
 function authenticatedFetch(url, options) {
+  let accessToken = authUtils.getToken();
+  console.log(accessToken);
   return fetch(url, {
     headers: {
       ...((options && options.headers) || {}),
-      Authorization: `Bearer ${authUtils.getToken()}`
+      Authorization: `Bearer ${accessToken}`
     },
     ...options
   });

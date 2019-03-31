@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import { ReactComponent as HomeIcon } from '../assets/sidebar-home.svg';
-import { ReactComponent as LibraryIcon } from '../assets/sidebar-library.svg';
-import { ReactComponent as SearchIcon } from '../assets/sidebar-search.svg';
-import DashboardSidebar from './DashboardSidebar';
-import Home from './Home';
-import Search from './Search';
-import Libraries from './Libraries';
+import DashboardSidebar from '../../components/Dashboard/DashboardSidebar';
+import { renderRoutes } from '..';
 
 // const openDashboardKeyframes = keyframes`
 //   from {
@@ -45,32 +40,6 @@ export class Dashboard extends Component {
     sidebarIsOpen: false
   };
 
-  constructor(props) {
-    super(props);
-    const currentPath = props.match.path;
-    this.routes = [
-      {
-        path: `${currentPath}/`,
-        exact: true,
-        name: 'Home',
-        icon: HomeIcon,
-        component: Home
-      },
-      {
-        path: `${currentPath}/search`,
-        name: 'Search',
-        icon: SearchIcon,
-        component: Search
-      },
-      {
-        path: `${currentPath}/libraries`,
-        name: 'Your Libraries',
-        icon: LibraryIcon,
-        component: Libraries
-      }
-    ];
-  }
-
   toggleSidebar = () => {
     this.setState(prevState => ({
       sidebarIsOpen: !prevState.sidebarIsOpen
@@ -79,6 +48,7 @@ export class Dashboard extends Component {
 
   render() {
     const currentPath = this.props.match.path;
+    console.log(this.props.routes);
     return (
       <DashboradGrid>
         <DashboardSidebar
@@ -87,7 +57,7 @@ export class Dashboard extends Component {
           <Link to="/">
             <DashboardSidebar.SidebarLogo />
           </Link>
-          {this.routes.map(route => (
+          {this.props.routes.map(route => (
             <DashboardSidebar.SidebarLink
               exact={route.exact}
               to={route.path}
@@ -97,13 +67,7 @@ export class Dashboard extends Component {
           ))}
         </DashboardSidebar>
         <DashboardMain>
-          {this.routes.map(route => (
-            <Route
-              path={route.path}
-              exact={route.exact}
-              component={route.component}
-            />
-          ))}
+          {renderRoutes(this.props.routes)}
         </DashboardMain>
         <DashboardPlayer />
       </DashboradGrid>

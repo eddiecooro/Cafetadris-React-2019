@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'styled-components/macro';
-import LoginForm from './components/LoginForm';
-import LoginWithSpotify from './components/LoginWithSpotify';
+import LoginForm from '../components/LoginForm';
+import LoginWithSpotify from '../components/LoginWithSpotify';
 
 export class Login extends Component {
   componentDidMount() {
