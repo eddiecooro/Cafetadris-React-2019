@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import DashboardSidebar from '../../components/Dashboard/DashboardSidebar';
+import DashboardSidebar from 'components/Dashboard/DashboardSidebar';
 import { renderRoutes } from '..';
 
 // const openDashboardKeyframes = keyframes`
@@ -66,9 +66,7 @@ export class Dashboard extends Component {
             />
           ))}
         </DashboardSidebar>
-        <DashboardMain>
-          {renderRoutes(this.props.routes)}
-        </DashboardMain>
+        <DashboardMain>{renderRoutes(this.props.routes)}</DashboardMain>
         <DashboardPlayer />
       </DashboradGrid>
     );

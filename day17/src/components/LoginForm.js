@@ -2,35 +2,25 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { css } from 'styled-components/macro';
 import authUtils from '../utils/authUtils';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 
-class formGenerator {
-  constructor(formSchema) {
-    this.formSchema = formSchema;
-  }
-  setFormSchema = function(formSchema) {
-    this.formSchema = formSchema;
-  };
-  getFormState = () =>
-    formSchema.reduce(
-      (prevComputedState, currentSchema) => {
-        let name = currentSchema.name;
-        prevComputedState.data[name] = '';
-        prevComputedState.error[name] = '';
-        return prevComputedState;
-      },
-      { data: {}, error: {} }
-    );
-}
-let formSchema = [
-  { name: 'username', type: 'text', label: 'Username' },
-  { name: 'password', type: 'password', label: 'Password' }
-];
+let fakeLogin = (username, password) =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (username === 'Eddie' && password === '123456') {
+        resolve({ status: 200, message: 'Logged in succesfuly' });
+      } else {
+        reject({ status: 401, message: 'Username/Password is wrong' });
+      }
+    }, 2000);
+  });
 
-let generatedLoginForm = new formGenerator(formSchema);
 export class LoginForm extends Component {
-  state = { ...generatedLoginForm.getFormState() };
+  state = {
+    data: {},
+    errors: {}
+  };
 
-  // handleChange = generatedLoginForm.getHandleChange();
   handleChange = e => {
     let name = e.target.name;
     let value = e.target.value;
@@ -43,60 +33,65 @@ export class LoginForm extends Component {
     }));
   };
 
-  submit = e => {
-    e.preventDefault();
-    if (
-      this.state.data.username === 'Eddie' &&
-      this.state.data.password === '12345'
-    ) {
-      this.setState(prevState => ({
-        data: {
-          ...prevState.data,
-          username: '',
-          password: ''
-        }
-      }));
-      authUtils.login('wefweefwef');
-      this.props.history.push('/');
-    } else {
-      this.setState({
-        error: {
-          username: 'Username is not correct',
-          password: 'Password is not correct'
-        }
+  handleSubmit = (values, { setSubmitting }) => {
+    fakeLogin(values.username, values.password)
+      .then(result => {
+        console.log(result.message);
+        // authUtils.login('wefweefwef');
+        // this.props.history.push('/');
+      })
+      .catch(err => {
+        console.error(err.message);
+      })
+      .finally(() => {
+        setSubmitting(false);
       });
-    }
+    // if (
+    //   this.state.data.username === 'Eddie' &&
+    //   this.state.data.password === '12345'
+    // ) {
+    //   this.setState(prevState => ({
+    //     data: {
+    //       ...prevState.data,
+    //       username: '',
+    //       password: ''
+    //     }
+    //   }));
+    //   authUtils.login('wefweefwef');
+    //   this.props.history.push('/');
+    // } else {
+    //   this.setState({
+    //     errors: {
+    //       username: 'Username is not correct',
+    //       password: 'Password is not correct'
+    //     }
+    //   });
+    // }
   };
 
   render() {
     return (
-      <form
-        css={css`
-          display: flex;
-          flex-direction: column;
-          padding: 35px;
-        `}>
-        {/* {generatedLoginForm.getFormFields()} */}
-        {formSchema.map(currentSchema => (
-          <React.Fragment key={currentSchema.name}>
-            <label htmlFor={currentSchema.name}>
-              {currentSchema.label}
-            </label>
-            <input
-              value={this.state.data[currentSchema.name]}
-              onChange={this.handleChange}
-              name={currentSchema.name}
-              type={currentSchema.type}
-            />
-            {this.state.error[currentSchema.name] && (
-              <p style={{ color: 'red' }}>
-                {this.state.error[currentSchema.name]}
-              </p>
-            )}
-          </React.Fragment>
-        ))}
-        <input onClick={this.submit} type="submit" />
-      </form>
+      <Formik
+        onSubmit={this.handleSubmit}
+        initialValues={{ username: 'Eddie', password: '' }}>
+        {({ isSubmitting }) => (
+          <Form
+            css={css`
+              display: flex;
+              flex-direction: column;
+              padding: 35px;
+            `}>
+            <label htmlFor="username">Username: </label>
+            <Field type="text" name="username" />
+            <ErrorMessage name="username" />
+            <label htmlFor="password">Password: </label>
+            <Field type="password" name="password" />
+            <ErrorMessage name="password" />
+            <input disabled={isSubmitting} type="submit" />
+            {/* <Debug /> */}
+          </Form>
+        )}
+      </Formik>
     );
   }
 }

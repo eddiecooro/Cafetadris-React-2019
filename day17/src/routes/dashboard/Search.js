@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Filters from '../../components/Filters';
+import Filters from 'components/Filters';
 
 export class Search extends Component {
   state = {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { css } from 'styled-components/macro';
-import LoginForm from '../components/LoginForm';
-import LoginWithSpotify from '../components/LoginWithSpotify';
+import LoginForm from 'components/LoginForm';
+import LoginWithSpotify from 'components/LoginWithSpotify';
+import SignupForm from 'components/SignupForm';
 
 export class Login extends Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ export class Login extends Component {
           align-items: center;
         `}>
         <LoginForm />
+        <SignupForm />
         <LoginWithSpotify />
       </div>
     );
