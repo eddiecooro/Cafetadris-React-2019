@@ -24,8 +24,6 @@ class TodoList extends Component {
     this.props.setFilter(filterName);
   };
 
-  getTodos = () => {};
-
   handleAddTodoPress = () => {
     if (this.state.inputValue) {
       this.props.addTodo(this.state.inputValue);
@@ -103,8 +101,6 @@ class TodoList extends Component {
 }
 
 let mapStateToProps = state => {
-  console.log(getHistory(state));
-  console.log(!!getHistory(state).length);
   return {
     todos: getFilteredTodos(state),
     isUndoable: !!getHistory(state).length

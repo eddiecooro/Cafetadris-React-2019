@@ -102,9 +102,7 @@ class TodoList extends Component {
           onChange={this.handleInputChange}
           type="text"
         />
-        <button
-          onClick={this.handleAddTodoPress}
-          className={styles.button}>
+        <button onClick={this.handleAddTodoPress} className={styles.button}>
           Add Todo
         </button>
         <div>

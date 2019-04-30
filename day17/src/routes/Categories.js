@@ -1,53 +1,57 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../api';
+import {
+  getCategories,
+  getCategoriesLoadingState,
+  getCategoriesError
+} from '../redux/selectors/categoriesSelectors';
+import { loadCategories } from '../redux/actions/categoriesActions';
+import { connect } from 'react-redux';
 
-export class Categories extends Component {
-  state = {
-    isLoading: true,
-    categories: []
-  };
-  componentDidMount() {
-    api.categories
-      .getAll()
-      .then(jsonResponse => {
-        this.setState({
-          isLoading: false,
-          categories: jsonResponse.categories.items
-        });
-      })
-      .catch(err => {
-        this.setState({ error: err });
-      });
+function Categories({
+  loadCategories,
+  isLoading,
+  error,
+  categories,
+  ...props
+}) {
+  React.useEffect(() => {
+    loadCategories();
+  }, []);
+
+  if (error) {
+    throw error;
   }
-
-  render() {
-    console.warn(this.state);
-    if (this.state.error) {
-      throw this.state.error;
-    }
-    if (this.state.isLoading) {
-      return (
-        <div>
-          <p>Loading...</p>
-        </div>
-      );
-    }
-
-    const currentPath = this.props.match.path;
+  if (isLoading) {
     return (
-      <ul>
-        <h1>Categories</h1>
-        {this.state.categories.map((category, index) => (
-          <li key={category.id}>
-            <Link to={`${currentPath}/${category.id}`}>
-              {category.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div>
+        <p>Loading...</p>
+      </div>
     );
   }
+
+  const currentPath = props.match.path;
+  return (
+    <ul>
+      <h1>Categories</h1>
+      {categories.map(category => (
+        <li key={category.id}>
+          <Link to={`${currentPath}/${category.id}`}>{category.name}</Link>
+        </li>
+      ))}
+    </ul>
+  );
 }
 
-export default Categories;
+let mapStateToProps = state => ({
+  categories: getCategories(state),
+  isLoading: getCategoriesLoadingState(state),
+  error: getCategoriesError(state)
+});
+let mapDispatchToProps = dispatch => ({
+  loadCategories: () => dispatch(loadCategories())
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Categories);
