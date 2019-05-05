@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { css } from 'styled-components/macro';
 // import Formik, { Field, ErrorMessage,Debug, Form } from './Formik';
-import { Formik, Field, ErrorMessage, Form } from 'formik';
+import { Formik, Field, ErrorMessage, Form, FieldArray, replace } from 'formik';
 import * as Yup from 'yup';
+import Slider from './Slider';
 
 let strongRegex = new RegExp(
   '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
@@ -54,21 +55,11 @@ class SignupForm extends Component {
             .required('Password is required')
             .matches(strongRegex, 'Password is weak')
         })}
-        // validate={values => {
-        //   let errors = {};
-        //   if (values.username.length <= 8) {
-        //     errors.username = 'Username is short';
-        //   }
-        //   if (!values.password.match(strongRegex)) {
-        //     errors.password = 'Password is weak';
-        //   }
-        //   if (values.password && values.password !== values.passwordConfirm) {
-        //     errors.passwordConfirm = 'Password confirm does not match';
-        //   }
-        //   return errors;
-        // }}
-        initialValues={{ username: 'Mohammad' }}>
-        {() => (
+        initialValues={{
+          username: 'Mohammad',
+          interests: []
+        }}>
+        {({ values, setFieldValue, isSubmitting }) => (
           <Form
             css={css`
               display: flex;
@@ -84,8 +75,46 @@ class SignupForm extends Component {
             <label htmlFor="passwordConfirm">Password confirm: </label>
             <Field type="password" name="passwordConfirm" />
             <CustomErrorMessage name="passwordConfirm" />
-            <input type="submit" />
-            {/* <Debug /> */}
+            <FieldArray name="interests">
+              {arrayHelpers => {
+                return (
+                  <>
+                    {values.interests.map((interest, index) => (
+                      <div
+                        key={index}
+                        style={{
+                          padding: '20px',
+                          margin: '10px',
+                          borderRadius: '8px',
+                          backgroundColor: '#9B4DCA'
+                        }}>
+                        <Field
+                          placeholder="Your interest name"
+                          name={`interests.${index}.name`}
+                          style={{ backgroundColor: 'white' }}
+                        />
+                        <Slider
+                          num={5}
+                          value={interest.value}
+                          onChange={newValue => {
+                            setFieldValue(`interests.${index}.value`, newValue);
+                          }}
+                        />
+                      </div>
+                    ))}
+                    <button
+                      onClick={() => {
+                        arrayHelpers.push({ name: '', value: 0 });
+                      }}
+                      style={{ width: '240px', margin: '5px auto 40px auto' }}
+                      type="button">
+                      Add interest
+                    </button>
+                  </>
+                );
+              }}
+            </FieldArray>
+            <input type="submit" disabled={isSubmitting} value="SignUp" />
           </Form>
         )}
       </Formik>

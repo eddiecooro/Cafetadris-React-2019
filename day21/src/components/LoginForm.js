@@ -87,8 +87,7 @@ export class LoginForm extends Component {
             <label htmlFor="password">Password: </label>
             <Field type="password" name="password" />
             <ErrorMessage name="password" />
-            <input disabled={isSubmitting} type="submit" />
-            {/* <Debug /> */}
+            <input disabled={isSubmitting} type="submit" value="Login" />
           </Form>
         )}
       </Formik>

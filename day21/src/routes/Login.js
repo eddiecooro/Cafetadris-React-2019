@@ -3,6 +3,10 @@ import { css } from 'styled-components/macro';
 import LoginForm from 'components/LoginForm';
 import LoginWithSpotify from 'components/LoginWithSpotify';
 import SignupForm from 'components/SignupForm';
+import Slider from '../components/Slider';
+import { connect } from 'react-redux';
+import { getSliderValue } from '../redux/selectors/sliderSelectors';
+import { setSliderValue } from '../redux/actions/sliderActions';
 
 export class Login extends Component {
   componentDidMount() {
@@ -28,6 +32,10 @@ export class Login extends Component {
           align-items: center;
         `}>
         <LoginForm />
+        {/* <Slider
+          value={this.props.sliderPosition}
+          onChange={this.props.setSliderPosition}
+        /> */}
         <SignupForm />
         <LoginWithSpotify />
       </div>
@@ -35,4 +43,9 @@ export class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(
+  state => ({ sliderPosition: getSliderValue(state) }),
+  dispatch => ({
+    setSliderPosition: newValue => dispatch(setSliderValue(newValue))
+  })
+)(Login);
