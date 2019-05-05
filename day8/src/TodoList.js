@@ -68,14 +68,14 @@ class TodoList extends Component {
     }
   };
 
-  handleAddTodoPress = () => {
+  handleAddTodoPress() {
     if (this.state.inputValue) {
       this.add(this.state.inputValue);
       this.setState({
         inputValue: ''
       });
     }
-  };
+  }
 
   handleInputChange = event => {
     this.setState({
