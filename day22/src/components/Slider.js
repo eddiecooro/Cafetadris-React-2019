@@ -16,6 +16,7 @@ const SliderHandle = styled.div`
   border-radius: ${handleWidth / 2}px;
   background-color: white;
   transform: ${props => `translate(${props.position}px, -25%)`};
+  transition: transform 0.7s cubic-bezier(0.08, 1.1, 0.47, 1.4);
   &:hover {
     cursor: pointer;
   }
@@ -39,6 +40,16 @@ function Slider({ num, value, onChange }) {
   const handleEnd = () => {
     clicked.current = false;
   };
+
+  // React.useEffect(() => {
+  //   const target = value * step;
+  //   const interval = setInterval(() => {
+  //     setPosition(position =>
+  //       target < position ? position - 2 : position + 2
+  //     );
+  //   }, 15);
+  //   return () => clearInterval(interval);
+  // }, [value]);
 
   const handleStart = () => {
     clicked.current = true;

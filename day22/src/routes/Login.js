@@ -4,9 +4,11 @@ import LoginForm from 'components/LoginForm';
 import LoginWithSpotify from 'components/LoginWithSpotify';
 import SignupForm from 'components/SignupForm';
 import Slider from '../components/Slider';
+import PoseTest from '../components/PoseTest';
 import { connect } from 'react-redux';
 import { getSliderValue } from '../redux/selectors/sliderSelectors';
 import { setSliderValue } from '../redux/actions/sliderActions';
+import TransitionTest from '../components/TransitionTest';
 
 export class Login extends Component {
   componentDidMount() {
@@ -36,6 +38,8 @@ export class Login extends Component {
           value={this.props.sliderPosition}
           onChange={this.props.setSliderPosition}
         /> */}
+        {/* <TransitionTest /> */}
+        <PoseTest />
         <SignupForm />
         <LoginWithSpotify />
       </div>

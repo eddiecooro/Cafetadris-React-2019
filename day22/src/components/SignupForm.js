@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { css } from 'styled-components/macro';
 // import Formik, { Field, ErrorMessage,Debug, Form } from './Formik';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import styled from 'styled-components';
 import { Formik, Field, ErrorMessage, Form, FieldArray, replace } from 'formik';
 import * as Yup from 'yup';
 import Slider from './Slider';
@@ -16,6 +18,42 @@ function CustomErrorMessage(props) {
     </ErrorMessage>
   );
 }
+
+const InterestItem = styled(CSSTransition).attrs(props => {
+  console.log(props);
+  return { classNames: 'interest-item', timeout: 1000 };
+})`
+  padding: 20px;
+  margin: 10px;
+  border-radius: 8px;
+  background-color: #9b4dca;
+  transition: opacity 0.4s linear, transform 0.5s linear;
+
+  &.interest-item-enter {
+    opacity: 0;
+    transform: translate(0, -40px);
+  }
+  &.interest-item-enter-active {
+    opacity: 1;
+    transform: translate(0, 0px);
+  }
+  &.interest-item-enter-done {
+    opacity: 1;
+    transform: translate(0, 0px);
+  }
+  &.interest-item-exit {
+    opacity: 1;
+    transform: translate(0, 0px);
+  }
+  &.interest-item-exit-active {
+    opacity: 0;
+    transform: translate(0, -40px);
+  }
+  &.interest-item-exit-done {
+    opacity: 0;
+    transform: translate(0, -40px);
+  }
+`;
 
 class SignupForm extends Component {
   state = {
@@ -79,29 +117,36 @@ class SignupForm extends Component {
               {arrayHelpers => {
                 return (
                   <>
-                    {values.interests.map((interest, index) => (
-                      <div
-                        key={index}
-                        style={{
-                          padding: '20px',
-                          margin: '10px',
-                          borderRadius: '8px',
-                          backgroundColor: '#9B4DCA'
-                        }}>
-                        <Field
-                          placeholder="Your interest name"
-                          name={`interests.${index}.name`}
-                          style={{ backgroundColor: 'white' }}
-                        />
-                        <Slider
-                          num={5}
-                          value={interest.value}
-                          onChange={newValue => {
-                            setFieldValue(`interests.${index}.value`, newValue);
-                          }}
-                        />
-                      </div>
-                    ))}
+                    <TransitionGroup>
+                      {values.interests.map((interest, index) => (
+                        <InterestItem key={index}>
+                          <div>
+                            <Field
+                              placeholder="Your interest name"
+                              name={`interests.${index}.name`}
+                              style={{ backgroundColor: 'white' }}
+                            />
+                            <Slider
+                              num={5}
+                              value={interest.value}
+                              onChange={newValue => {
+                                setFieldValue(
+                                  `interests.${index}.value`,
+                                  newValue
+                                );
+                              }}
+                            />
+                            <button
+                              onClick={() => {
+                                arrayHelpers.remove(index);
+                              }}
+                              style={{ margin: '20px' }}>
+                              Delete
+                            </button>
+                          </div>
+                        </InterestItem>
+                      ))}
+                    </TransitionGroup>
                     <button
                       onClick={() => {
                         arrayHelpers.push({ name: '', value: 0 });
