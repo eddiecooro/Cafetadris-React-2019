@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "react-transition-group": "^4.0.0"
+    "debounce": "^1.2.0"
   }
 }

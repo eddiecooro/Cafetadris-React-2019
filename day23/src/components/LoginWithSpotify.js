@@ -8,7 +8,7 @@ export class LoginWithSpotify extends Component {
     return (
       <Button>
         <AppLink
-          href={`https://accounts.spotify.com/authorize?client_id=${yourclientid}&response_type=token&redirect_uri=http://localhost:3000/callback/`}>
+          href={`https://accounts.spotify.com/authorize?client_id=${yourclientid}&response_type=token&redirect_uri=http://localhost:3000/callback/&scopes=user-top-read`}>
           Login With Spotify
         </AppLink>
       </Button>

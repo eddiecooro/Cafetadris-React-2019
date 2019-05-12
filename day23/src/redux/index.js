@@ -18,4 +18,4 @@ let thunk = store => next => action => {
   return next(action);
 };
 
-export default createStore(rootReducer, applyMiddleware(logger, thunk));
+export default createStore(rootReducer, applyMiddleware(thunk));

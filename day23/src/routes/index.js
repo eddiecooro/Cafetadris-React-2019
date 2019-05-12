@@ -9,6 +9,7 @@ import SpotifyCallback from './SpotifyCallback';
 import Login from './Login';
 import NotFound from './NotFound';
 import dashboardConfig from './dashboard';
+import Personalization from './Personalization';
 
 export const routesConfig = [
   {
@@ -24,6 +25,11 @@ export const routesConfig = [
   {
     path: '/categories',
     component: Categories,
+    auth: true
+  },
+  {
+    path: '/personalization',
+    component: Personalization,
     auth: true
   },
   {

@@ -9,7 +9,7 @@ export let loadCategories = () => (dispatch, getState) => {
   dispatch({ type: LOAD_CATEGORIES });
   api.categories
     .getAll()
-    .then(res => dispatch(loadCategoriesSuccess(res.categories.items)))
+    .then(res => dispatch(loadCategoriesSuccess(res.data.categories.items)))
     .catch(err => dispatch(loadCategoriesFail(err)));
 };
 

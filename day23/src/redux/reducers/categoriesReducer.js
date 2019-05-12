@@ -18,7 +18,9 @@ export default (state = initialState, action) =>
         break;
       case LOAD_CATEGORIES_SUCCESS:
         state.isLoading = false;
-        state.categoriesList.push(action.payload.categories);
+        state.categoriesList = state.categoriesList.concat(
+          action.payload.categories
+        );
         break;
       case LOAD_CATEGORIES_FAIL:
         state.isLoading = false;
