@@ -1,0 +1,27 @@
+.myDiv {
+  width: 100px;
+  height: 100px;
+  margin: 50px;
+  background-color: aqua;
+  transition: opacity 0.5s linear, transform 1s linear;
+}
+
+.myDivEnter {
+}
+.myDivEnterDone {
+  transform: translate(0px);
+  opacity: 1;
+}
+.myDivEnterActive {
+  transform: translate(0px);
+  opacity: 1;
+}
+
+.myDivExit {
+}
+.myDivExitActive {
+  transform: translate(-100px);
+  opacity: 0;
+}
+.myDivExitDone {
+}
