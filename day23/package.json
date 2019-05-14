@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "debounce": "^1.2.0",
     "formik": "^1.5.2",
     "history": "^4.9.0",
     "popmotion": "^8.6.9",

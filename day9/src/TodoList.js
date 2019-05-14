@@ -92,9 +92,9 @@ class TodoList extends Component {
             <TodoListItem
               {...todo}
               key={todo.id}
-              onToggle={() => this.toggle(todo.id)}
-              onDelete={() => this.delete(todo.id)}
-              onEdit={newName => this.edit(newName, todo.id)}
+              onToggle={this.toggle}
+              onDelete={this.delete}
+              onEdit={this.edit}
             />
           ))}
         </ul>
@@ -103,9 +103,7 @@ class TodoList extends Component {
           onChange={this.handleInputChange}
           type="text"
         />
-        <button
-          onClick={this.handleAddTodoPress}
-          className={styles.button}>
+        <button onClick={this.handleAddTodoPress} className={styles.button}>
           Add Todo
         </button>
         <div>

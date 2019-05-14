@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "start": "serve -s build -l 5000",
+    "deploy": "netlify deploy"
+  },
+  "name": "release",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "serve": "^11.0.0"
+  },
+  "devDependencies": {
+    "@liara/cli": "^1.2.0",
+    "netlify-cli": "^2.11.18"
+  }
+}

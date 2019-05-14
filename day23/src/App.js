@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Suspense, Component, lazy } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
@@ -23,7 +23,9 @@ class App extends Component {
             {/* <ErrorThrowingComponent /> */}
             <Navbar />
             <ErrorHandling>
-              <Switch>{renderRoutes(routesConfig)}</Switch>
+              <Suspense fallback={<div>Loading...</div>}>
+                <Switch>{renderRoutes(routesConfig)}</Switch>
+              </Suspense>
             </ErrorHandling>
           </div>
         </Provider>

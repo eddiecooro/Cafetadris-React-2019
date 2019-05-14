@@ -5,6 +5,11 @@ import TodoList from './TodoList';
 import MouseTracker from './MouseTracker';
 import './App.css';
 
+if (process.env.NODE_ENV !== 'production') {
+  const { whyDidYouUpdate } = require('why-did-you-update');
+  whyDidYouUpdate(React);
+}
+
 class App extends Component {
   state = {
     showTimer: false,

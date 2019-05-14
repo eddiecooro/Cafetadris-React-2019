@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Route } from 'react-router-dom';
 import AuthRoute from '../components/AuthRoute';
 
-import Homepage from './Homepage';
+// import Homepage from './Homepage';
 import Category from './Category';
 import Categories from './Categories';
 import SpotifyCallback from './SpotifyCallback';
-import Login from './Login';
+// import Login from './Login';
 import NotFound from './NotFound';
 import dashboardConfig from './dashboard';
 import Personalization from './Personalization';
+
+const Login = lazy(() => import('./Login'));
+const Homepage = lazy(() => import('./Homepage'));
 
 export const routesConfig = [
   {
